@@ -348,24 +348,26 @@ For this task, I created a model and checked the various assumptions. To check t
 independent variable. For Age and Weight, the linearity assumption did not seem to be met as there appeared to be fan shapes in the plot. For TotChol, the linearity
 assumption seemed to be met as there was no clear pattern in the plot. To check the independence assumption, I used a Durbin-Watson test. The null hypothesis for this
 test was that the errors are independent and the alternative hypothesis for this test was that the errors are not independent. The test statistic and p-value for this
-test were, DW = 2.0085, and 0.9549, respectively. Based on the p-value, the decision was made to not reject the null hypothesis as the p-value was larger than the significance level, 0.03. The conclusion was that there is not enough evidence that the errors are not independent. Therefore, based on the Durbin-Watson test, the
+test were, DW = 2.0085, and 0.9549, respectively. Based on the p-value, the decision was made to not reject the null hypothesis as the p-value was larger than the 
+significance level, 0.03. The conclusion was that there is not enough evidence that the errors are not independent. Therefore, based on the Durbin-Watson test, the
 independence assumption was met. To check the normality assumption, I used the Shapiro-Wilk test. The null hypothesis for this test was that the errors were normally
 distributed and the alternative hypothesis was that the errors are not normally distributed. The p-value for this test, 0.06728, was larger than the significance level,
-0.03, so the decision was made to not reject the null hypothesis. The conclusion was that there is not enough evidence that the errors are not normally distributed. Therefore, based on the Shapiro-Wilk test,
-the normality assumption was met. To check the equal variance assumption I made a scatterplot of the model's residuals plotted against its fitted values. Based on the plot,
-the equal variance assumption was not met as there appeared to be a fan shape in the plot. For determining if the independent variables explain some of the variation in the
-dependent variable, my null hypothesis was "β_Age = β_Weight = β_TotChol = 0" and my alternative hypothesis was "at least one β_j != 0". The test statistic and p-value for
-this test were, F = 23.89, and, 8.783e-14, respectively. The decision made was to reject the null hypothesis as the p-value was smaller than the significance level, 0.03.
-The conclusion was that there is enough evidence that that Age, Weight, and TotChol explain some of the variation in BPSysAve. The value of R^2 was 0.2056 and the value of
-R^2_adj was 0.197. The overall model was found to be significant, in this case meaning that at least one independent variable was also. Therefore, I needed to test each
-individual variable to see if it was significant. For Age, the null hypothesis was  "β_Age = 0" and the alternative hypothesis was "β_Age != 0". The test statistic was
-t = 7.967 and the p-value was 4.25e-14. The p-value was smaller than the significance level, 0.03, so the decision was made to reject the null hypothesis. The conclusion for
-this test was that there is enough evidence that Age is important in explaining some of the variability in BPSysAve. For Weight, the null hypothesis was "β_Weight = 0" and
-the alternative hypotheses was "β_Weight != 0" The test statistic was t = 2.219 and the p-value was 0.0273. This p-value is smaller than the significance level, 0.03, so the
-decision was made to reject the null hypothesis. The conclusion was that there is enough evidence that Weight is important in explaining some of the variability in 
-BPSysAve. For TotChol, the null hypothesis was "β_TotChol = 0" and the alternative hypothesis was "β_TotChol != 0". The test statistic was t = 1.632 and the p-value was
-0.1038. This p-value is larger than the significance level, 0.03, so the decision made was to not reject the null hypothesis. The conclusion was that there is not enough
-evidence that TotChol is important in explaining some of the variability in BPSysAve. 
+0.03, so the decision was made to not reject the null hypothesis. The conclusion was that there is not enough evidence that the errors are not normally distributed.
+Therefore, based on the Shapiro-Wilk test, the normality assumption was met. To check the equal variance assumption I made a scatterplot of the model's residuals
+plotted against its fitted values. Based on the plot, the equal variance assumption was not met as there appeared to be a fan shape in the plot. For determining if the
+independent variables explain some of the variation in the dependent variable, my null hypothesis was "β_Age = β_Weight = β_TotChol = 0" and my alternative hypothesis
+was "at least one β_j != 0". The test statistic and p-value for this test were, F = 23.89, and, 8.783e-14, respectively. The decision made was to reject the null
+hypothesis as the p-value was smaller than the significance level, 0.03. The conclusion was that there is enough evidence that that Age, Weight, and TotChol explain
+some of the variation in BPSysAve. The value of R^2 was 0.2056 and the value of R^2_adj was 0.197. The overall model was found to be significant, in this case meaning
+that at least one independent variable was also. Therefore, I needed to test each individual variable to see if it was significant. For Age, the null hypothesis was
+"β_Age = 0" and the alternative hypothesis was "β_Age != 0". The test statistic was t = 7.967 and the p-value was 4.25e-14. The p-value was smaller than the
+significance level, 0.03, so the decision was made to reject the null hypothesis. The conclusion for this test was that there is enough evidence that Age is important
+in explaining some of the variability in BPSysAve. For Weight, the null hypothesis was "β_Weight = 0" and the alternative hypotheses was "β_Weight != 0" The test
+statistic was t = 2.219 and the p-value was 0.0273. This p-value is smaller than the significance level, 0.03, so the decision was made to reject the null hypothesis.
+The conclusion was that there is enough evidence that Weight is important in explaining some of the variability in BPSysAve. For TotChol, the null hypothesis was
+"β_TotChol = 0" and the alternative hypothesis was "β_TotChol != 0". The test statistic was t = 1.632 and the p-value was 0.1038. This p-value is larger than the
+significance level, 0.03, so the decision made was to not reject the null hypothesis. The conclusion was that there is not enough evidence that TotChol is important
+in explaining some of the variability in BPSysAve. 
 
 
 
