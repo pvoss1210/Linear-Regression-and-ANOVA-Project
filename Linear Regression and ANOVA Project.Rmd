@@ -489,23 +489,23 @@ is within the confidence interval for μ_RaceD - μ_RaceB.  For RaceD vs RaceC, 
 
 Before checking the normality assumption, I used the table function to provide a count of the number of observations for each Race group. While there are only 4 groups for
 Race, two of the groups contained fewer than 30 observations, so I made the decision to perform the Shapiro-Wilk test on the residuals for the overall model rather than on
-each individual group's residuals. For this test, the null hypothesis was that the errors are normally distributed and the alternative hypothesis was that the errors are not
-normally distributed. The p-value was 9.734e-12, which is smaller than the significance level, 0.10, so the decision was made to reject the null hypothesis. The conclusion
-was that there is enough evidence that the errors are not normally distributed. Therefore, the normality assumption was not met based on the Shapiro-Wilk test. To check the
-equal variance assumption, I used Levene's Test as the normality assumption was not met. The null hypothesis was "σ^2_RaceA = σ^2_RaceB = σ^2_RaceC = σ^2_RaceD" and the
-alternative hypothesis was "at least one σ^2_i is different". The test statistic was F = 2.46 and the p-value was 0.06303. The p-value was smaller than the significance
-level, 0.10, so the decision was made to reject the null hypothesis. The conclusion was that there is enough evidence that at least one σ^2_i is different. Therefore, based
-on Levene's test, the equal variance assumption was not met.
+each individual group's residuals. For this test, the null hypothesis was that the errors are normally distributed and the alternative hypothesis was that the errors are 
+not normally distributed. The p-value was 9.734e-12, which is smaller than the significance level, 0.10, so the decision was made to reject the null hypothesis. The
+conclusion was that there is enough evidence that the errors are not normally distributed. Therefore, the normality assumption was not met based on the Shapiro-Wilk test.
+To check the equal variance assumption, I used Levene's Test as the normality assumption was not met. The null hypothesis was "σ^2_RaceA = σ^2_RaceB = σ^2_RaceC =
+σ^2_RaceD" and the alternative hypothesis was "at least one σ^2_i is different". The test statistic was F = 2.46 and the p-value was 0.06303. The p-value was smaller than
+the significance level, 0.10, so the decision was made to reject the null hypothesis. The conclusion was that there is enough evidence that at least one σ^2_i is
+different. Therefore, based on Levene's test, the equal variance assumption was not met.
 
-For checking if all treatment effects were equal to 0 using the Treatment Effects Model, my null hypothesis was "𝜏_RaceA = 𝜏_RaceB = 𝜏_RaceC = 𝜏_RaceD = 0" and my alternative
-hypothesis was "at least one of the treatment effects is not equal to 0". The test statistic was F = 4.1013 and the p-value was 0.00718. Because the p-value was smaller than
-the significance level, 0.10, the decision was made to reject the null hypothesis. The conclusion was that there is enough evidence that at least one of the treatment 
-effects in not equal to 0. In other words, in terms of the overall population, there is evidence that at least one of the Race groups has a mean Weight that differs from the
-mean Weight for all the Race groups combined. The next step was to conduct a Tukey test. For RaceB vs RaceA, the difference was significant; 0 was not within the confidence
-interval for μ_RaceB - μ_RaceA. For RaceC vs RaceA, the difference was significant; 0 was not within the confidence interval for μ_RaceC - μ_RaceA. For RaceD vs RaceA, the
-difference was not significant; 0 was within the confidence interval for μ_RaceD - μ_RaceA. For RaceC vs RaceB, the difference was not significant; 0 was within the
-confidence interval for μ_RaceC - μ_RaceB. For RaceD vs RaceB, the difference was not significant; 0 was within the confidence interval for μ_RaceD - μ_RaceB.  For RaceD
-vs RaceC, the difference was significant; 0 was not within the confidence interval for μ_RaceD - μ_RaceC.
+For checking if all treatment effects were equal to 0 using the Treatment Effects Model, my null hypothesis was "𝜏_RaceA = 𝜏_RaceB = 𝜏_RaceC = 𝜏_RaceD = 0" and my
+alternative hypothesis was "at least one of the treatment effects is not equal to 0". The test statistic was F = 4.1013 and the p-value was 0.00718. Because the p-value 
+was smaller than the significance level, 0.10, the decision was made to reject the null hypothesis. The conclusion was that there is enough evidence that at least one of
+the treatment effects in not equal to 0. In other words, in terms of the overall population, there is evidence that at least one of the Race groups has a mean Weight that
+differs from the mean Weight for all the Race groups combined. The next step was to conduct a Tukey test. For RaceB vs RaceA, the difference was significant; 0 was not
+within the confidence interval for μ_RaceB - μ_RaceA. For RaceC vs RaceA, the difference was significant; 0 was not within the confidence interval for μ_RaceC - μ_RaceA.
+For RaceD vs RaceA, the difference was not significant; 0 was within the confidence interval for μ_RaceD - μ_RaceA. For RaceC vs RaceB, the difference was not significant;
+0 was within the confidence interval for μ_RaceC - μ_RaceB. For RaceD vs RaceB, the difference was not significant; 0 was within the confidence interval for μ_RaceD -
+μ_RaceB.  For RaceD vs RaceC, the difference was significant; 0 was not within the confidence interval for μ_RaceD - μ_RaceC.
 
 
 
