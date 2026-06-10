@@ -518,7 +518,10 @@ present for that factor. If the lines are not perfectly flat and horizontal, tha
 are parallel, this suggests that no interactions are present. To check for interactions further, you can use hypothesis testing with the null hypothesis being "(αβ)_ij =
 0, ∀(i,j)" and the alternative hypothesis being "at least one (αβ)_ij != 0" with the p-value coming from the ANOVA table row that shows the predictors separated by a
 colon. If you are confident that interactions are present you should not test for main effects for each factor. If you are confident that interactions are not present, you
-can then test for main effects for each factor with the null hypothesis equal to "α_i = 0, ∀i" and the alternative hypothesis equal to "at least one α_i != 0" for the first factor, and the null alternative hypothesis equal to "β_j = 0, ∀j"and the alternative hypothesis equal to "at least one β_j != 0" for the second factor. The p-values for these tests come from the rows of the ANOVA table corresponding to each individual variable.  If you tested for main effects and found factors were significant the next step is to conduct a Bonferroni and/or Tukey test, which can be used to test whether differences of levels within each factor are significant. 
+can then test for main effects for each factor with the null hypothesis equal to "α_i = 0, ∀i" and the alternative hypothesis equal to "at least one α_i != 0" for the
+first factor, and the null alternative hypothesis equal to "β_j = 0, ∀j"and the alternative hypothesis equal to "at least one β_j != 0" for the second factor. The p-values
+for these tests come from the rows of the ANOVA table corresponding to each individual variable.  If you tested for main effects and found factors were significant the
+next step is to conduct a Bonferroni and/or Tukey test, which can be used to test whether differences of levels within each factor are significant. 
 
 
 
