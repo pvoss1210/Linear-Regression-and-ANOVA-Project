@@ -557,11 +557,12 @@ barplot(mean_BPSysAve_Gender,main = "Mean BPSysAve by Gender Group", xlab = "Gen
 
 mean_BPSysAve_MaritalStatus <- tapply(medical_data$BPSysAve, medical_data$MaritalStatus, mean)
 
-barplot(mean_BPSysAve_MaritalStatus, main = "Mean BPSysAve by MaritalStatus Group", xlab = "MaritalStatus", ylab = "Mean BPSysAve", names.arg = c("D", "LP", "M", "NM", "S", "W"), ylim = c(0,140))
+barplot(mean_BPSysAve_MaritalStatus, main = "Mean BPSysAve by MaritalStatus Group", xlab = "MaritalStatus", ylab = "Mean BPSysAve", names.arg = c("D", "LP", "M", "NM","S", "W"), ylim = c(0,140))
 
 ```
 
-Note: In the chart above, D represents Divorced, LP represents LivePartner, M represents Married, NM represents NeverMarried, S represents Separated, and W represents Widowed.
+Note: In the chart above, D represents Divorced, LP represents LivePartner, M represents Married, NM represents NeverMarried, S represents Separated, and W represents
+Widowed.
 
 
 
@@ -575,7 +576,9 @@ interaction.plot(x.factor = updated_MS, trace.factor = medical_data$Gender, resp
 
 ```
 
-The lines generated for each of the two gender levels were different and not perfectly flat and horizontal, consistent with main effects of each factor being present. It does appear, however, that interactions are present between MaritalStatus and Gender as the lines on the plot are not parallel. If interactions are present, the factors are not additive.
+The lines generated for each of the two gender levels were different and not perfectly flat and horizontal, consistent with main effects of each factor being present. It
+does appear, however, that interactions are present between MaritalStatus and Gender as the lines on the plot are not parallel. If interactions are present, the factors
+are not additive.
 
 
 
@@ -640,7 +643,9 @@ decision: reject H_0
 conclusion: There is enough evidence that the interaction effect is significant. It seems plausible that interactions are present.
 
 
-We do not need to test for main effects as interactions are present based on the hypothesis testing directly above and the interaction plot. Interactions being present here means that the factors do not affect the dependent variable, BPSysAve, independently, so we cannot test whether the factors are significant individually as we do when we test for main effects.
+We do not need to test for main effects as interactions are present based on the hypothesis testing directly above and the interaction plot. Interactions being present
+here means that the factors do not affect the dependent variable, BPSysAve, independently, so we cannot test whether the factors are significant individually as we do when
+we test for main effects.
 
 
 
