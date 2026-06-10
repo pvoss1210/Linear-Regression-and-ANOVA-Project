@@ -4,7 +4,7 @@ Statistical modeling project in R featuring linear regression, ANOVA, and model 
 
 ## View Report
 
-https://pvoss1210.github.io/Medical-Data-Statistical-Analysis/
+https://pvoss1210.github.io/Linear-Regression-and-ANOVA-Project/
 
 ## Files:
 
