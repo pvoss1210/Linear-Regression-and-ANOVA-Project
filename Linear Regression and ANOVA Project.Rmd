@@ -149,7 +149,30 @@ cor(medical_data$Age, medical_data$Pulse, method = "pearson")
 
 #### Paragraph:
 
-For this task, I created a model and proceeded to check the relevant assumptions. To check the linearity assumption, I made a scatterplot of the residuals from the model plotted against Age. There did not seem to be any clear pattern in the plot so, based on the plot, the linearity assumption was met. To check the normality assumption, I used the Shapiro-Wilk test. The null hypothesis for this test was that the errors are normally distributed, and the alternative hypothesis was that the errors are not normally distributed. The p-value for this test, 0.8553, was larger than the significance level, 0.07, so the decision was made to not reject the null hypothesis. The conclusion for this test was that there is not enough evidence that the errors are not normally distributed. Therefore, based on the Shapiro-Wilk test, the normality assumption was met. To check the equal variance assumption, I generated a scatterplot of the residuals from the model plotted against the model's fitted values. There was no clear pattern in the plot so, based on it, the equal variance assumption was met. I conducted hypothesis testing to determine if the independent variable was explaining some of the variation in the dependent variable. The null hypothesis for this test was "β_Age = 0", and the alternative hypothesis was "β_Age != 0". The test statistic value for this test was F = 5.763 and the p-value was 0.01702. The p-value was smaller than the significance level, 0.07, so the decision was made to reject the null hypothesis. The conclusion for this test was that there is enough evidence that Age is explaining some of the variability in Pulse. The equation of the regression line, calling Pulse Y and Age x_1, is Ŷ = 77.33580 - 0.09102x_1, based on the information generated with the summary function. The value for R^2 was 0.02024, indicating that 2.024% of the variability in Pulse is explained by Age. The value of r, the Pearson correlation coefficient, was -0.1422598. This indicates that there is a weak negative linear association between Age And Pulse. Based on r, the Pearson correlation coefficient, I do believe that there is a linear association between Pulse and Age as the value for this indicates that there is one; its absolute value is greater than 0.1. Based on R^2 I do not believe the model fits the data very well; the R^2 value indicates that only a small percentage of the variation in Pulse is explained by Age. 
+For this task, I created a model and proceeded to check the relevant assumptions. To check the linearity
+assumption, I made a scatterplot of the residuals from the model plotted against Age. There did not seem
+to be any clear pattern in the plot so, based on the plot, the linearity assumption was met. To check
+the normalityassumption, I used the Shapiro-Wilk test. The null hypothesis for this test was that the
+errors are normally distributed, and the alternative hypothesis was that the errors are not normally
+distributed. The p-value for this test, 0.8553, was larger than the significance level, 0.07, so the
+decision was made to not reject the null hypothesis. The conclusion for this test was that there is not
+enough evidence that the errors are not normally distributed. Therefore, based on the Shapiro-Wilk test,
+the normality assumption was met. To check the equal variance assumption, I generated a scatterplot of
+the residuals from the model plotted against the model's fitted values. There was no clear pattern in
+the plot so, based on it, the equal variance assumption was met. I conducted hypothesis testing to
+determine if the independent variable was explaining some of the variation in the dependent variable.
+The null hypothesis for this test was "β_Age = 0", and the alternative hypothesis was "β_Age != 0". The
+test statistic value for this test was F = 5.763 and the p-value was 0.01702. The p-value was smaller
+than the significance level, 0.07, so the decision was made to reject the null hypothesis. The
+conclusion for this test was that there is enough evidence that Age is explaining some of the
+variability in Pulse. The equation of the regression line, calling Pulse Y and Age x_1, is Ŷ = 77.33580
+- 0.09102x_1, based on the information generated with the summary function. The value for R^2 was
+0.02024, indicating that 2.024% of the variability in Pulse is explained by Age. The value of r, the
+Pearson correlation coefficient, was -0.1422598. This indicates that there is a weak negative linear
+association between Age And Pulse. Based on r, the Pearson correlation coefficient, I do believe that
+there is a linear association between Pulse and Age as the value for this indicates that there is one;
+its absolute value is greater than 0.1. Based on R^2 I do not believe the model fits the data very well;
+the R^2 value indicates that only a small percentage of the variation in Pulse is explained by Age. 
 
 
 
