@@ -651,9 +651,20 @@ we test for main effects.
 
 #### Paragraphs:
 
-To check the normality assumption, I used a Shapiro-Wilk test. The null hypothesis was that the errors are normally distributed. The alternative hypothesis was that the errors are not normally distributed. The p-value for this test, 0.06042, was larger than the significance level, 0.02, so the decision made was to not reject the null hypothesis. The conclusion was that there is not enough evidence that the errors are not normally distributed. Therefore, based on the Shapiro-Wilk test, the normality assumption was met. To check the equal variance assumption, I generated a plot of residuals vs fitted values. Based on this plot, the equal variance assumption was not met as the vertical spread of the residuals was not the same at all fitted values.  
+To check the normality assumption, I used a Shapiro-Wilk test. The null hypothesis was that the errors are normally distributed. The alternative hypothesis was that the
+errors are not normally distributed. The p-value for this test, 0.06042, was larger than the significance level, 0.02, so the decision made was to not reject the null
+hypothesis. The conclusion was that there is not enough evidence that the errors are not normally distributed. Therefore, based on the Shapiro-Wilk test, the normality
+assumption was met. To check the equal variance assumption, I generated a plot of residuals vs fitted values. Based on this plot, the equal variance assumption was not
+met as the vertical spread of the residuals was not the same at all fitted values.  
 
-I created an interaction plot with the MaritalStatus levels on the x-axis and mean BPSysAve on the y-axis. The lines generated for each of the two gender levels were different and not perfectly flat and horizontal, consistent with main effects of each factor being present. It did appear, however, that interactions were present between MaritalStatus and Gender as the lines on the plot were not parallel. If interactions are present, the factors are not additive. My null hypothesis for testing further if interactions were present was "(αβ)_ij = 0, ∀(i,j)" and my alternative hypothesis was "at least one (αβ)_ij != 0". The test statistic for this test was F = 3.2579 and the p-value was 0.0071272. Because the p-value was smaller than the significance level, 0.02, the decision made was to reject the null hypothesis. The conclusion for this test was that there is enough evidence that the interaction effect is significant / it seems plausible that interactions are present. We do not need to test for main effects as interactions being present here means that the factors do not affect the dependent variable, BPSysAve, independently, so we cannot test whether the factors are significant individually as we do when we test for main effects.
+I created an interaction plot with the MaritalStatus levels on the x-axis and mean BPSysAve on the y-axis. The lines generated for each of the two gender levels were
+different and not perfectly flat and horizontal, consistent with main effects of each factor being present. It did appear, however, that interactions were present between
+MaritalStatus and Gender as the lines on the plot were not parallel. If interactions are present, the factors are not additive. My null hypothesis for testing further if
+interactions were present was "(αβ)_ij = 0, ∀(i,j)" and my alternative hypothesis was "at least one (αβ)_ij != 0". The test statistic for this test was F = 3.2579 and the
+p-value was 0.0071272. Because the p-value was smaller than the significance level, 0.02, the decision made was to reject the null hypothesis. The conclusion for this test
+was that there is enough evidence that the interaction effect is significant / it seems plausible that interactions are present. We do not need to test for main effects
+as interactions being present here means that the factors do not affect the dependent variable, BPSysAve, independently, so we cannot test whether the factors are
+significant individually as we do when we test for main effects.
 
 
 
