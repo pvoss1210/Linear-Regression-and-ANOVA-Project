@@ -1,0 +1,588 @@
+---
+title: "Linear Regression and ANOVA Project"
+author: "Peter Voss"
+date: "2026-04-22"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Initial Steps
+
+#### Importing the Data
+
+```{r importing the dataset, echo = TRUE}
+
+medical_data <- read.csv("medicaldata_final.csv")
+
+```
+
+
+#### Converting Categorical Variables to Factors 
+
+```{r factor conversions, echo = TRUE}
+
+medical_data$Gender <- factor(medical_data$Gender)
+
+medical_data$Education <- factor(medical_data$Education,levels = c("8th Grade", "9 - 11th Grade","High School", "Some College", "College Grad"), ordered = TRUE)
+
+medical_data$MaritalStatus <- factor(medical_data$MaritalStatus)
+
+medical_data$Race <- factor(medical_data$Race)
+
+medical_data$Smoker <- factor(medical_data$Smoker)
+
+```
+
+
+
+## Simple Linear Regression: Age as a Predictor of Pulse 
+
+
+#### Creating the Model:
+
+```{r  model creation code, echo = TRUE}
+
+lm.saved <- lm(Pulse ~ Age, data = medical_data)
+
+```
+
+
+
+#### Scatterplot of the Data:
+
+```{r creating a scatterplot of the data, echo = TRUE}
+
+plot(x = medical_data$Age, y = medical_data$Pulse, main = "Scatterplot of The Data", xlab = "Age", ylab = "Pulse")
+
+```
+
+
+
+#### Checking the Linearity Assumption:
+
+```{r checking linearity assumption, echo = TRUE}
+
+plot(x = medical_data$Age, y = lm.saved$residuals, xlab = "Age", ylab = "Residuals")
+abline(h = 0, lty = 2)
+
+```
+
+Based on the residuals vs Age plot, the linearity assumption is met; there is no clear pattern in the plot.
+
+
+
+#### Checking the Normality Assumption:
+
+H_0: The errors are normally distributed
+
+H_1: The errors are not normally distributed
+
+```{r Shapiro-Wilk test for normality assumption check, echo = TRUE}
+
+shapiro.test(lm.saved$residuals)
+
+```
+
+p-value: 0.8553
+
+decision: do not reject H_0
+
+conclusion: There is not enough evidence that the errors are not normally distributed.
+
+
+From the Shapiro-Wilk test, the normality assumption is met as the p-value, 0.8553, is larger than the significance level, 0.07.
+
+
+
+#### Checking the Equal Variance Assumption:
+
+```{r checking the equal variance assumption, echo = TRUE}
+
+par(mfrow = c(2,2))
+
+plot(lm.saved)
+
+par(mfrow = c(1,1))
+
+```
+Note: The residuals vs fitted values plot is in the top left corner.
+
+Based on the residuals vs fitted values plot, the equal variance assumption is met; there is no clear pattern in the plot.
+
+
+
+#### Does Age explain some of the variation in Pulse?
+
+``` {r using summary(), echo = TRUE}
+
+summary(lm.saved)
+
+```
+
+
+H_0: β_Age = 0 
+
+H_1: β_Age != 0
+
+test statistic: F = 5.763
+
+p-value: 0.01702
+
+decision: reject H_0
+
+conclusion: There is enough evidence that Age is explaining some of the variability in Pulse.
+
+
+
+#### Pearson Correlation Coefficient:
+
+```{r Pearson correlation coefficient code, echo = TRUE}
+
+cor(medical_data$Age, medical_data$Pulse, method = "pearson")
+
+```
+
+
+
+#### Paragraph:
+
+For this task, I created a model and proceeded to check the relevant assumptions. To check the linearity assumption, I made a scatterplot of the residuals from the model plotted against Age. There did not seem to be any clear pattern in the plot so, based on the plot, the linearity assumption was met. To check the normality assumption, I used the Shapiro-Wilk test. The null hypothesis for this test was that the errors are normally distributed, and the alternative hypothesis was that the errors are not normally distributed. The p-value for this test, 0.8553, was larger than the significance level, 0.07, so the decision was made to not reject the null hypothesis. The conclusion for this test was that there is not enough evidence that the errors are not normally distributed. Therefore, based on the Shapiro-Wilk test, the normality assumption was met. To check the equal variance assumption, I generated a scatterplot of the residuals from the model plotted against the model's fitted values. There was no clear pattern in the plot so, based on it, the equal variance assumption was met. I conducted hypothesis testing to determine if the independent variable was explaining some of the variation in the dependent variable. The null hypothesis for this test was "β_Age = 0", and the alternative hypothesis was "β_Age != 0". The test statistic value for this test was F = 5.763 and the p-value was 0.01702. The p-value was smaller than the significance level, 0.07, so the decision was made to reject the null hypothesis. The conclusion for this test was that there is enough evidence that Age is explaining some of the variability in Pulse. The equation of the regression line, calling Pulse Y and Age x_1, is Ŷ = 77.33580 - 0.09102x_1, based on the information generated with the summary function. The value for R^2 was 0.02024, indicating that 2.024% of the variability in Pulse is explained by Age. The value of r, the Pearson correlation coefficient, was -0.1422598. This indicates that there is a weak negative linear association between Age And Pulse. Based on r, the Pearson correlation coefficient, I do believe that there is a linear association between Pulse and Age as the value for this indicates that there is one; its absolute value is greater than 0.1. Based on R^2 I do not believe the model fits the data very well; the R^2 value indicates that only a small percentage of the variation in Pulse is explained by Age. 
+
+
+
+## Multiple Linear Regression: Systolic Blood Pressure as a Function of Age, Weight, and Total Cholesterol 
+
+
+#### Creating the Model:
+
+``` {r creating the model code, echo = TRUE}
+
+MLR <- lm(BPSysAve ~ Age + Weight + TotChol, data = medical_data)
+
+``` 
+
+
+
+#### Checking the Linearity Assumption:
+
+```{r generating plots of residuals vs predictor and related code, echo = TRUE}
+
+plot(x = medical_data$Age, y = MLR$residuals)
+abline(h = 0)
+
+plot(x = medical_data$Weight, y = MLR$residuals)
+abline(h = 0)
+
+plot(x = medical_data$TotChol, y = MLR$residuals)
+abline(h = 0)
+
+```
+
+For Age, the linearity assumption does not seem to be met as there appears to be a fan shape in the plot. For Weight, also, the linearity assumption does not seem to be met as there appears to be a fan shape in the plot. For TotChol, the linearity assumption seems to be met as there is no clear pattern in the plot.
+
+
+
+#### Checking the Independence Assumption:
+
+H_0: The errors are independent
+
+H_1: The errors are not independent
+
+```{r Durbin-Watson test code, echo = TRUE}
+
+library(lmtest)
+
+dwtest(MLR, alternative = "two.sided")
+
+```
+
+test statistic: DW = 2.0085
+
+p-value: 0.9549
+
+decision: do not reject H_0
+
+conclusion: There is not enough evidence that the errors are not independent.
+
+Based on the Durbin-Watson test, the independence assumption is met as the p-value, 0.9549, is larger than the significance level, 0.03.
+
+
+
+#### Checking the Normality Assumption:
+
+H_0: The errors are normally distributed
+
+H_1: The errors are not normally distributed
+
+```{r SW test code, echo - TRUE}
+
+shapiro.test(MLR$residuals)
+
+```
+
+p-value: 0.06728
+
+decision: do not reject H_0
+
+conclusion: There is not enough evidence that the errors are not normally distributed.
+
+
+Based on the Shapiro-Wilk test, the normality assumption is met as the p-value, 0.06728, is larger than the significance level, 0.03.
+
+
+
+#### Checking the Equal Variance Assumption:
+
+```{r using plot() and related code, echo = TRUE}
+
+plot(x = MLR$fitted.values, y = MLR$residuals, main = "Residuals vs Fitted", ylab = "Residuals", xlab = "Fitted Values")
+
+abline(h = 0, lty = 2)
+
+
+```
+
+Based on the residuals vs fitted values plot, I do not think the equal variance assumption is met as there appears to be a fan shape in the plot. 
+
+
+
+#### Do the independent variables explain some of the variation in the dependent variable?
+
+H_0: β_Age = β_Weight = β_TotChol = 0
+
+H_1: at least one β_j != 0
+
+```{r summary(), echo = TRUE}
+
+summary(MLR)
+
+```
+
+test statistic: F = 23.89
+
+p-value: 8.783e-14
+
+decision: reject H_0
+
+conclusion: There is enough evidence that that Age, Weight, and TotChol explain some of the variation in BPSysAve.
+
+R^2: 0.2056
+
+R^2_adj: 0.197
+
+We need to test each individual independent variable to see if it is significant as the overall model was found to be significant which, in this case, means that at least one independent variable is also.
+
+
+#### Which Independent Variables Are Important?
+
+For Age:
+
+H_0: β_Age = 0
+
+H_1: β_Age != 0
+
+test statistic: t = 7.967
+
+p-value: 4.25e-14
+
+decision: reject H_0
+
+conclusion: There is enough evidence that Age is important in explaining some of the variability in BPSysAve.
+
+
+
+For Weight:
+
+H_0: β_Weight = 0
+
+H_1: β_Weight != 0
+
+test statistic: t = 2.219
+
+p-value: 0.0273
+
+decision: reject H_0
+
+conclusion: There is enough evidence that Weight is important in explaining some of the variability in BPSysAve.
+
+
+
+For TotChol:
+
+H_0: β_TotChol = 0
+
+H_1: β_TotChol != 0
+
+test statistic: t = 1.632
+
+p-value: 0.1038
+
+decision: do not reject H_0
+
+conclusion: There is not enough evidence that TotChol is important in explaining some of the variability in BPSysAve.
+
+
+
+#### Paragraph:
+
+For this task, I created a model and checked the various assumptions. To check the linearity assumption, I created scatterplots of the residuals plotted against each independent variable. For Age and Weight, the linearity assumption did not seem to be met as there appeared to be fan shapes in the plot. For TotChol, the linearity assumption seemed to be met as there was no clear pattern in the plot. To check the independence assumption, I used a Durbin-Watson test. The null hypothesis for this test was that the errors are independent and the alternative hypothesis for this test was that the errors are not independent. The test statistic and p-value for this test were, DW = 2.0085, and 0.9549, respectively. Based on the p-value, the decision was made to not reject the null hypothesis as the p-value was larger than the significance level, 0.03. The conclusion was that there is not enough evidence that the errors are not independent. Therefore, based on the Durbin-Watson test, the independence assumption was met. To check the normality assumption, I used the Shapiro-Wilk test. The null hypothesis for this test was that the errors were normally distributed and the alternative hypothesis was that the errors are not normally distributed. The p-value for this test, 0.06728, was larger than the significance level, 0.03, so the decision was made to not reject the null hypothesis. The conclusion was that there is not enough evidence that the errors are not normally distributed. Therefore, based on the Shapiro-Wilk test, the normality assumption was met. To check the equal variance assumption I made a scatterplot of the model's residuals plotted against its fitted values. Based on the plot, the equal variance assumption was not met as there appeared to be a fan shape in the plot. For determining if the independent variables explain some of the variation in the dependent variable, my null hypothesis was "β_Age = β_Weight = β_TotChol = 0" and my alternative hypothesis was "at least one β_j != 0". The test statistic and p-value for this test were, F = 23.89, and, 8.783e-14, respectively. The decision made was to reject the null hypothesis as the p-value was smaller than the significance level, 0.03. The conclusion was that there is enough evidence that that Age, Weight, and TotChol explain some of the variation in BPSysAve. The value of R^2 was 0.2056 and the value of R^2_adj was 0.197. The overall model was found to be significant, in this case meaning that at least one independent variable was also. Therefore, I needed to test each individual variable to see if it was significant. For Age, the null hypothesis was  "β_Age = 0" and the alternative hypothesis was "β_Age != 0". The test statistic was t = 7.967 and the p-value was 4.25e-14. The p-value was smaller than the significance level, 0.03, so the decision was made to reject the null hypothesis. The conclusion for this test was that there is enough evidence that Age is important in explaining some of the variability in BPSysAve. For Weight, the null hypothesis was "β_Weight = 0" and the alternative hypotheses was "β_Weight != 0" The test statistic was t = 2.219 and the p-value was 0.0273. This p-value is smaller than the significance level, 0.03, so the decision was made to reject the null hypothesis. The conclusion was that there is enough evidence that Weight is important in explaining some of the variability in BPSysAve. For TotChol, the null hypothesis was "β_TotChol = 0" and the alternative hypothesis was "β_TotChol != 0". The test statistic was t = 1.632 and the p-value was 0.1038. This p-value is larger than the significance level, 0.03, so the decision made was to not reject the null hypothesis. The conclusion was that there is not enough evidence that TotChol is important in explaining some of the variability in BPSysAve. 
+
+
+
+## One-Way ANOVA: Weight by Race 
+
+
+#### Creating the Model: 
+
+```{r creating a model lm() code, echo = TRUE}
+
+anova_model <- lm(Weight ~ Race, data = medical_data)
+
+```
+
+
+
+#### Checking the Normality Assumption:
+
+```{r determining if normality assumption should be checked by group, echo = TRUE}
+
+table(medical_data$Race)
+
+
+```
+We should not check the normality assumption by group as, although there are only 4 Race groups, some groups have fewer than 30 observations.
+
+
+H_0: The errors are normally distributed
+
+H_1: The errors are not normally distributed
+
+```{r Shapiro-Wilk test code, echo = TRUE}
+
+shapiro.test(anova_model$residuals)
+
+```
+p-value: 9.734e-12
+
+decision: reject H_0
+
+conclusion: There is enough evidence that the errors are not normally distributed.
+
+
+The normality assumption is not met based on the Shapiro-Wilk test as the p-value, 9.734e-12, is smaller than the significance level, 0.10.
+
+
+
+#### Checking the Equal Variance Assumption:
+
+H_0: σ^2_RaceA = σ^2_RaceB = σ^2_RaceC = σ^2_RaceD
+
+H_1: at least one σ^2_i is different
+
+```{r LT library, echo = FALSE}
+
+library(car)
+
+```
+
+```{r LT Code , echo = TRUE}
+
+leveneTest(anova_model)
+
+```
+test statistic: F = 2.46
+
+p-value: 0.06303
+
+decision: reject H_0
+
+conclusion: There is enough evidence that at least one σ^2_i is different.
+
+The equal variance assumption is not met as the p-value, 0.06303, is smaller than the significance level, 0.10.
+
+
+
+#### Are All of the Treatment Effects Equal to Zero?
+
+```{r generating ANOVA table, echo = TRUE}
+
+anova(anova_model)
+
+```
+
+
+H_0: 𝜏_RaceA = 𝜏_RaceB = 𝜏_RaceC = 𝜏_RaceD = 0
+
+H_1: at least one of the treatment effects is not equal to 0
+
+test statistic: F = 4.1013
+
+p-value: 0.00718
+
+decision: reject H_0
+
+conclusion: There is enough evidence that at least one of the treatment effects is not equal to 0.
+
+
+
+#### Tukey: 
+
+```{r Tukey related code, echo = TRUE}
+
+lm.aov <- aov(medical_data$Weight ~ medical_data$Race)
+
+tukey <- TukeyHSD(lm.aov, conf.level = 0.90)
+
+tukey
+
+```
+For RaceB vs RaceA, the difference was significant; 0 is not within the confidence interval for μ_RaceB - μ_RaceA. For RaceC vs RaceA, the difference was significant; 0 is not within the confidence interval for μ_RaceC - μ_RaceA. For RaceD vs RaceA, the difference was not significant; 0 is within the confidence interval for μ_RaceD - μ_RaceA. For RaceC vs RaceB, the difference was not significant; 0 is within the confidence interval for μ_RaceC - μ_RaceB. For RaceD vs RaceB, the difference was not significant; 0 is within the confidence interval for μ_RaceD - μ_RaceB.  For RaceD vs RaceC, the difference was significant; 0 is not within the confidence interval for μ_RaceD - μ_RaceC.
+
+
+
+#### Paragraphs:
+
+Before checking the normality assumption, I used the table function to provide a count of the number of observations for each Race group. While there are only 4 groups for Race, two of the groups contained fewer than 30 observations, so I made the decision to perform the Shapiro-Wilk test on the residuals for the overall model rather than on each individual group's residuals. For this test, the null hypothesis was that the errors are normally distributed and the alternative hypothesis was that the errors are not normally distributed. The p-value was 9.734e-12, which is smaller than the significance level, 0.10, so the decision was made to reject the null hypothesis. The conclusion was that there is enough evidence that the errors are not normally distributed. Therefore, the normality assumption was not met based on the Shapiro-Wilk test. To check the equal variance assumption, I used Levene's Test as the normality assumption was not met. The null hypothesis was "σ^2_RaceA = σ^2_RaceB = σ^2_RaceC = σ^2_RaceD" and the alternative hypothesis was "at least one σ^2_i is different". The test statistic was F = 2.46 and the p-value was 0.06303. The p-value was smaller than the significance level, 0.10, so the decision was made to reject the null hypothesis. The conclusion was that there is enough evidence that at least one σ^2_i is different. Therefore, based on Levene's test, the equal variance assumption was not met.
+
+For checking if all treatment effects were equal to 0 using the Treatment Effects Model, my null hypothesis was "𝜏_RaceA = 𝜏_RaceB = 𝜏_RaceC = 𝜏_RaceD = 0" and my alternative hypothesis was "at least one of the treatment effects is not equal to 0". The test statistic was F = 4.1013 and the p-value was 0.00718. Because the p-value was smaller than the significance level, 0.10, the decision was made to reject the null hypothesis. The conclusion was that there is enough evidence that at least one of the treatment effects in not equal to 0. In other words, in terms of the overall population, there is evidence that at least one of the Race groups has a mean Weight that differs from the mean Weight for all the Race groups combined. The next step was to conduct a Tukey test. For RaceB vs RaceA, the difference was significant; 0 was not within the confidence interval for μ_RaceB - μ_RaceA. For RaceC vs RaceA, the difference was significant; 0 was not within the confidence interval for μ_RaceC - μ_RaceA. For RaceD vs RaceA, the difference was not significant; 0 was within the confidence interval for μ_RaceD - μ_RaceA. For RaceC vs RaceB, the difference was not significant; 0 was within the confidence interval for μ_RaceC - μ_RaceB. For RaceD vs RaceB, the difference was not significant; 0 was within the confidence interval for μ_RaceD - μ_RaceB.  For RaceD vs RaceC, the difference was significant; 0 was not within the confidence interval for μ_RaceD - μ_RaceC.
+
+
+
+## Two-Way ANOVA Procedure Overview
+
+
+For two-way ANOVA, assuming the model assumptions are met, you first create an interaction plot to gauge if main effects are present for each factor and if there are interactions between the factors. If the lines corresponding to the levels of the factor not on the x-axis are not all the same line, this suggests that main effects are present for that factor. If the lines are not perfectly flat and horizontal, that suggests that main effects are present for the other factor. If the lines on the plot are parallel, this suggests that no interactions are present. To check for interactions further, you can use hypothesis testing with the null hypothesis being "(αβ)_ij = 0, ∀(i,j)" and the alternative hypothesis being "at least one (αβ)_ij != 0" with the p-value coming from the ANOVA table row that shows the predictors separated by a colon. If you are confident that interactions are present you should not test for main effects for each factor. If you are confident that interactions are not present, you can then test for main effects for each factor with the null hypothesis equal to "α_i = 0, ∀i" and the alternative hypothesis equal to "at least one α_i != 0" for the first factor, and the null alternative hypothesis equal to "β_j = 0, ∀j"and the alternative hypothesis equal to "at least one β_j != 0" for the second factor. The p-values for these tests come from the rows of the ANOVA table corresponding to each individual variable.  If you tested for main effects and found factors were significant the next step is to conduct a Bonferroni and/or Tukey test, which can be used to test whether differences of levels within each factor are significant. 
+
+
+
+## Two-Way ANOVA: Systolic Blood Pressure by Gender and Marital Status 
+
+
+#### Creating the Model:
+
+```{r creating a model with lm(), echo = TRUE}
+
+model <- lm(BPSysAve ~ Gender * MaritalStatus, data = medical_data)
+
+```
+
+
+
+#### The Bar Chart for Gender:
+
+```{r creating Gender bar chart and related code, echo = TRUE}
+
+mean_BPSysAve_Gender <- tapply(medical_data$BPSysAve, medical_data$Gender, mean)
+
+
+barplot(mean_BPSysAve_Gender,main = "Mean BPSysAve by Gender Group", xlab = "Gender", ylab = "Mean BPSysAve", ylim = c(0,140))
+
+```
+
+
+
+#### The Bar Chart for MaritalStatus:
+
+```{r creating MaritalStatus bar chart and related code, echo = TRUE}
+
+mean_BPSysAve_MaritalStatus <- tapply(medical_data$BPSysAve, medical_data$MaritalStatus, mean)
+
+barplot(mean_BPSysAve_MaritalStatus, main = "Mean BPSysAve by MaritalStatus Group", xlab = "MaritalStatus", ylab = "Mean BPSysAve", names.arg = c("D", "LP", "M", "NM", "S", "W"), ylim = c(0,140))
+
+```
+
+Note: In the chart above, D represents Divorced, LP represents LivePartner, M represents Married, NM represents NeverMarried, S represents Separated, and W represents Widowed.
+
+
+
+#### Interaction Plot:
+
+```{r creating interaction plot and related code, echo = TRUE}
+
+updated_MS <- factor(medical_data$MaritalStatus, labels = c("D", "LP", "M", "NM", "S", "W"))
+
+interaction.plot(x.factor = updated_MS, trace.factor = medical_data$Gender, response = medical_data$BPSysAve, xlab = "MaritalStatus", ylab = "Mean BPSysAve")
+
+```
+
+The lines generated for each of the two gender levels were different and not perfectly flat and horizontal, consistent with main effects of each factor being present. It does appear, however, that interactions are present between MaritalStatus and Gender as the lines on the plot are not parallel. If interactions are present, the factors are not additive.
+
+
+
+#### Checking the Normality Assumption:
+
+H_0: The errors are normally distributed
+
+H_1: The errors are not normally distributed
+
+```{r code for Shapiro-Wilk test, echo = TRUE}
+
+shapiro.test(model$residuals)
+
+```
+
+p-value: 0.06042
+
+decision: do not reject H_0
+
+conclusion: There is not enough evidence that the errors are not normally distributed.
+
+
+Based on the Shapiro-Wilk test, the normality assumption is met as the p-value, 0.06042, is larger than alpha, 0.02.
+
+
+
+#### Checking the Equal Variance Assumption:
+
+```{r generating residuals vs fitted plot, echo = TRUE}
+
+par(mfrow = c(2,2))
+plot(model)
+par(mfrow=c(1,1))
+
+```
+
+Note: The residuals vs fitted plot is in the top left.
+
+Based on the residuals vs fitted plot, the equal variance assumption is not met; The vertical spread of the points is not the same at all fitted values.
+
+
+
+#### Determining if the Interactions are Significant:
+
+```{r ANOVA table code, echo = TRUE}
+
+anova(model)
+
+```
+
+
+H_0: (αβ)_ij = 0, ∀(i,j)
+
+H_1: at least one (αβ)_ij != 0 
+
+test statistic: F = 3.2579
+
+p-value: 0.0071272
+
+decision: reject H_0
+
+conclusion: There is enough evidence that the interaction effect is significant. It seems plausible that interactions are present.
+
+
+We do not need to test for main effects as interactions are present based on the hypothesis testing directly above and the interaction plot. Interactions being present here means that the factors do not affect the dependent variable, BPSysAve, independently, so we cannot test whether the factors are significant individually as we do when we test for main effects.
+
+
+
+#### Paragraphs:
+
+To check the normality assumption, I used a Shapiro-Wilk test. The null hypothesis was that the errors are normally distributed. The alternative hypothesis was that the errors are not normally distributed. The p-value for this test, 0.06042, was larger than the significance level, 0.02, so the decision made was to not reject the null hypothesis. The conclusion was that there is not enough evidence that the errors are not normally distributed. Therefore, based on the Shapiro-Wilk test, the normality assumption was met. To check the equal variance assumption, I generated a plot of residuals vs fitted values. Based on this plot, the equal variance assumption was not met as the vertical spread of the residuals was not the same at all fitted values.  
+
+I created an interaction plot with the MaritalStatus levels on the x-axis and mean BPSysAve on the y-axis. The lines generated for each of the two gender levels were different and not perfectly flat and horizontal, consistent with main effects of each factor being present. It did appear, however, that interactions were present between MaritalStatus and Gender as the lines on the plot were not parallel. If interactions are present, the factors are not additive. My null hypothesis for testing further if interactions were present was "(αβ)_ij = 0, ∀(i,j)" and my alternative hypothesis was "at least one (αβ)_ij != 0". The test statistic for this test was F = 3.2579 and the p-value was 0.0071272. Because the p-value was smaller than the significance level, 0.02, the decision made was to reject the null hypothesis. The conclusion for this test was that there is enough evidence that the interaction effect is significant / it seems plausible that interactions are present. We do not need to test for main effects as interactions being present here means that the factors do not affect the dependent variable, BPSysAve, independently, so we cannot test whether the factors are significant individually as we do when we test for main effects.
+
+
+
+
