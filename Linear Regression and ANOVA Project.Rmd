@@ -346,13 +346,12 @@ conclusion: There is not enough evidence that TotChol is important in explaining
 
 For this task, I created a model and checked the various assumptions. To check the linearity assumption, I created scatterplots of the residuals plotted against each
 independent variable. For Age and Weight, the linearity assumption did not seem to be met as there appeared to be fan shapes in the plot. For TotChol, the linearity
-assumption seemed to be met as there was no clear pattern in the plot. To check the independence assumption, I used a Durbin-Watson test. The null hypothesis for this test
-was that the errors are independent and the alternative hypothesis for this test was that the errors are not independent. The test statistic and p-value for this test were,
-DW = 2.0085, and 0.9549, respectively. Based on the p-value, the decision was made to not reject the null hypothesis as the p-value was larger than the significance level,
-0.03. The conclusion was that there is not enough evidence that the errors are not independent. Therefore, based on the Durbin-Watson test, the independence assumption was
-met. To check the normality assumption, I used the Shapiro-Wilk test. The null hypothesis for this test was that the errors were normally distributed and the alternative
-hypothesis was that the errors are not normally distributed. The p-value for this test, 0.06728, was larger than the significance level, 0.03, so the decision was made to
-not reject the null hypothesis. The conclusion was that there is not enough evidence that the errors are not normally distributed. Therefore, based on the Shapiro-Wilk test,
+assumption seemed to be met as there was no clear pattern in the plot. To check the independence assumption, I used a Durbin-Watson test. The null hypothesis for this
+test was that the errors are independent and the alternative hypothesis for this test was that the errors are not independent. The test statistic and p-value for this
+test were, DW = 2.0085, and 0.9549, respectively. Based on the p-value, the decision was made to not reject the null hypothesis as the p-value was larger than the significance level, 0.03. The conclusion was that there is not enough evidence that the errors are not independent. Therefore, based on the Durbin-Watson test, the
+independence assumption was met. To check the normality assumption, I used the Shapiro-Wilk test. The null hypothesis for this test was that the errors were normally
+distributed and the alternative hypothesis was that the errors are not normally distributed. The p-value for this test, 0.06728, was larger than the significance level,
+0.03, so the decision was made to not reject the null hypothesis. The conclusion was that there is not enough evidence that the errors are not normally distributed. Therefore, based on the Shapiro-Wilk test,
 the normality assumption was met. To check the equal variance assumption I made a scatterplot of the model's residuals plotted against its fitted values. Based on the plot,
 the equal variance assumption was not met as there appeared to be a fan shape in the plot. For determining if the independent variables explain some of the variation in the
 dependent variable, my null hypothesis was "β_Age = β_Weight = β_TotChol = 0" and my alternative hypothesis was "at least one β_j != 0". The test statistic and p-value for
