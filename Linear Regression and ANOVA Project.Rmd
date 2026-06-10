@@ -26,7 +26,8 @@ medical_data <- read.csv("medicaldata_final.csv")
 
 medical_data$Gender <- factor(medical_data$Gender)
 
-medical_data$Education <- factor(medical_data$Education,levels = c("8th Grade", "9 - 11th Grade","High School", "Some College", "College Grad"), ordered = TRUE)
+medical_data$Education <- factor(medical_data$Education,levels = c("8th Grade", "9 - 11th Grade","High
+School", "Some College", "College Grad"), ordered = TRUE)
 
 medical_data$MaritalStatus <- factor(medical_data$MaritalStatus)
 
@@ -55,7 +56,8 @@ lm.saved <- lm(Pulse ~ Age, data = medical_data)
 
 ```{r creating a scatterplot of the data, echo = TRUE}
 
-plot(x = medical_data$Age, y = medical_data$Pulse, main = "Scatterplot of The Data", xlab = "Age", ylab = "Pulse")
+plot(x = medical_data$Age, y = medical_data$Pulse, main = "Scatterplot of The Data", xlab = "Age", ylab 
+= "Pulse")
 
 ```
 
@@ -70,7 +72,8 @@ abline(h = 0, lty = 2)
 
 ```
 
-Based on the residuals vs Age plot, the linearity assumption is met; there is no clear pattern in the plot.
+Based on the residuals vs Age plot, the linearity assumption is met; there is no clear pattern in the 
+plot.
 
 
 
@@ -93,7 +96,8 @@ decision: do not reject H_0
 conclusion: There is not enough evidence that the errors are not normally distributed.
 
 
-From the Shapiro-Wilk test, the normality assumption is met as the p-value, 0.8553, is larger than the significance level, 0.07.
+From the Shapiro-Wilk test, the normality assumption is met as the p-value, 0.8553, is larger than the
+significance level, 0.07.
 
 
 
@@ -110,7 +114,8 @@ par(mfrow = c(1,1))
 ```
 Note: The residuals vs fitted values plot is in the top left corner.
 
-Based on the residuals vs fitted values plot, the equal variance assumption is met; there is no clear pattern in the plot.
+Based on the residuals vs fitted values plot, the equal variance assumption is met; there is no clear
+pattern in the plot.
 
 
 
@@ -204,7 +209,10 @@ abline(h = 0)
 
 ```
 
-For Age, the linearity assumption does not seem to be met as there appears to be a fan shape in the plot. For Weight, also, the linearity assumption does not seem to be met as there appears to be a fan shape in the plot. For TotChol, the linearity assumption seems to be met as there is no clear pattern in the plot.
+For Age, the linearity assumption does not seem to be met as there appears to be a fan shape in the
+plot. For Weight, also, the linearity assumption does not seem to be met as there appears to be a fan
+shape in the plot. For TotChol, the linearity assumption seems to be met as there is no clear pattern in 
+the plot.
 
 
 
